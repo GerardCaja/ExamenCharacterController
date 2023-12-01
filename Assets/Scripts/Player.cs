@@ -25,6 +25,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float _sensorRadius = 0.2f;
     [SerializeField] private LayerMask _gorundlayer;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -54,7 +55,7 @@ public class Player : MonoBehaviour
         {
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + _camera.eulerAngles.y;
 
-            transform.rotation = Quaternion.Euler(0, smoothAngle, 0);
+            transform.rotation = Quaternion.Euler(0, targetAngle, 0);
             Vector3 moveDirecton = Quaternion.Euler(0, targetAngle, 0) * Vector3.forward;
             _controller.Move(moveDirecton.normalized * _playerSpeed * Time.deltaTime);
         }
