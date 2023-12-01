@@ -25,12 +25,14 @@ public class Player : MonoBehaviour
     [SerializeField] private float _sensorRadius = 0.2f;
     [SerializeField] private LayerMask _gorundlayer;
 
+    [SerializeField] private bool _isGrounded;
+
 
     // Start is called before the first frame update
     void Start()
     {
         _controller = GetComponent<CharacterController>();
-        _animator = GetComponent<Animator>();
+        _animator = GetComponentInChildren<Animator>();
         _camera = Camera.main.transform;
     }
 
@@ -67,14 +69,14 @@ public class Player : MonoBehaviour
 
         _animator.SetBool("isJumping", !_isGrounded);
 
-        if(_isGrounded && _playerGravity < 0)
+        if(_isGrounded && _playerGravity.y < 0)
         {
-            _playerGravity = -2;
+            _playerGravity.y = -2;
         }
 
         if(_isGrounded && Input.GetButtonDown("Jump"))
         {
-            _playerSpeed.y = _jumpHeight;
+            _playerGravity.y = _jumpHeight;
         }
 
         _playerGravity.y += _gravity * Time.deltaTime;
