@@ -67,11 +67,12 @@ public class Player : MonoBehaviour
     {
         _isGrounded = Physics.CheckSphere(_sensorPosition.position, _sensorRadius, _gorundlayer);
 
-        _animator.SetBool("isJumping", !_isGrounded);
+        
 
         if(_isGrounded && _playerGravity.y < 0)
         {
             _playerGravity.y = -2;
+            _animator.SetBool("isJumping", !_isGrounded);
         }
 
         if(_isGrounded && Input.GetButtonDown("Jump"))
